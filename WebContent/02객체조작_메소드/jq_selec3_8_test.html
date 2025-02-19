@@ -27,7 +27,20 @@
 	<script>
 	$(function( ){
 	
+		//<h1>요소를 선택해서 가져와 전체 문서화면을 기준으로
+		//아래쪽방향으로 얼마만큼 떨어져 있는지 <h1>의 y축 좌표위치값 얻기
+		let topNum = $("h1").offset().top;
+		console.log(topNum);// 2000
 		
+		//웹브라우저 윈도우창정보를 지닌(window객체)를 선택해서 
+		//scrollTop(2000); 메소드를 호출하면 
+		//스크롤막대바가 y축 방향으로 2000px만큼 이동되어 보이게 설정할수 있다.
+		$(window).scrollTop(topNum);//2000
+		
+		//scrollTop(); 메소드에 수치를 넣지 않고 바로 호출하면
+		//스크롤 막대바가 수직 아래방향으로 이동한 y축의 좌표값 2000px를 얻을수 있다
+		let sct = $(window).scrollTop();
+		console.log(sct);//2000
 		
 	});
 	</script>

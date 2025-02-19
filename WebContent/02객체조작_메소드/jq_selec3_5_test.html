@@ -22,10 +22,10 @@
 			
 			- 문법3. $("요소선택").prop("tagName" 또는 "nodeType" 또는  "selectedIndex" 또는  "defaultValue");
 					 해석 : 선택한 요소의 태그명(tagName)이나 노트타입(nodeType), 
-					        선택상자에서 선택된 option태그의 인덱스 위치번호를 구합니다.
-									만약 prop("defaultValue");
-									 -> 사용자가 value속성값을 변경 시켜도 
-									    초기에 설정된 value속성의 값을 가져올수 있습니다. 
+					           선택상자에서 선택된 option태그의 인덱스 위치번호를 구합니다.
+						    만약 prop("defaultValue");
+						 -> 사용자가 value속성값을 변경 시켜도 
+						    초기에 설정된 value속성의 값을 가져올수 있습니다. 
 			
 		
 		
@@ -51,21 +51,42 @@
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 	<script>
-	$(function( ){
-// 		<input type="checkbox" name="chk1" id="chk1">
-		console.log($("#chk1").prop("checked"));
-		console.log($("#chk2").prop("checked"));
-		console.log($("#chk3").prop("checked", false));
-
-		console.log($("#se_1").prop("selectedIndex"));
+	$(function(){
+		//<input type="checkbox" name="chk1" id="chk1"> 요소를 선택해서
+		//prop("checked") 메소드를 호출하면
+		//선택해서 가져온  체크박스<input>이  체크가 된 상태이면 true반환하고 
+		//미 체크된 상태이면 false반환
+		let result_1 = $("#chk1").prop("checked");
+		console.log(result_1); //false
 		
-		let result1 = $("lable:eq(0)").prop("nodeType");
-		console.log(result1);
+		//<input type="checkbox" name="chk2" id="chk2" checked> 요소를 선택해서
+		//prop("checked") 메소드 호출하면 체크된 상태이기때문에 true반환 
+		let result_2 = $("#chk2").prop("checked"); //true
+		console.log(result_2);
 		
+		//id="chk3" <input type="checkbox" id="chk3">체크박스 선택해서
+		//prop("checked", true); 메소드를 호출하면 
+		//미체크된 상태면 true를 넣어 줘서 
+		//강제로 체크된 상태의 checked속성을 설정 할수 있다.
+		let result_3 = $("#chk3").prop("checked", true);//강제로 체크되게 true값 넣자 
+		console.log(result_3);
+	
+		//id="se_1"인 <select id="se_1">...</select>선택해서 가져와
+		// selected 속성이 설정된(선택된) <option>요소의 인덱스를 반환합니다.
+		let result_4 = $("#se_1").prop("selectedIndex");
+		console.log(result_4);
+		
+		let result_5 =  $("label:eq(0)").prop("nodeType");
+		console.log(result_5); //<label for="chk1">chk1</label>  요소노드 - 정수 1
+		
+		//ID:<input type="text" name="id" id="user_id" value="admin" > 의 
+		//value속성값을 scott으로 변경 하자
 		$("#user_id").val("scott");
 		
-		console.log($("#user_id").prop("defaultValue"));
-		
+		//prop메소드에 defaultValue속성명을 넣어 주면
+		//초기에 설정된 value="admin" 인 admin을 얻을수 있다.
+		let result_6 = $("#user_id").prop("defaultValue");
+		console.log(result_6); //"admin" 
 		
 		
 	});
@@ -87,9 +108,9 @@
 		</p>
 		<p>
 			<select name="se_1" id="se_1">
-				<option value="opt1" selected>option1</option>
+				<option value="opt1">option1</option>
 				<option value="opt2">option2</option>
-				<option value="opt3" >option3</option>
+				<option value="opt3" selected>option3</option>
 			</select>
 		</p>			
 	</form>
