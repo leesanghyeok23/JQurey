@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+  <style>
+  	 
+  	 #student-list{  list-style-type:none;  padding:0;}/*불릿 동그라미 기호 없애서 학생목록 스타일 설정*/
+  	 .student-item{  margin: 5px  0;} /*각 학생 이름 li항목의 바깥 여백(마진 설정)*/
+  	
+  </style>
+
+  <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+  
+  
+</head>
+<body>
+	<h1>학생 관리 시스템</h1>
+	<div>
+		<!-- 학생 이름 입력 input -->
+		<input type="text" id="student-name" placeholder="학생이름" value="">
+	
+		<!-- 학생 추가 버튼 -->
+		<button id="add-student">추가</button>
+	</div>
+	
+	<!-- 학생 이름 목록을 표시할 ul요소 영역 -->
+	<ul id="student-list"></ul>	
+	
+	<script type="text/javascript">
+	
+		let students = []; //학생들의 이름을 저장할 빈 배열 생성
+		
+		//입력한 학생 이름을  위 students빈 배열에 추가하고, 
+		//renderList()함수를 호출하여 업데이트된  학생목록을 화면에 보여주는  기능의 함수 
+		function addStudent(name){
+			students.push(name); //<input>에 입력받은 학생이름을 위 students배열에 추가 
+			renderList();//업데이트된 학생목록을 보여주기 위해 함수 호출
+		}
+		
+		//학생명 삭제 함수 
+		// 이 함수는 name매개변수로 삭제할 학생이름을 받아
+		// 위 students배열에서  해당 학생이름을 제거한후,
+		// renderList()함수를 호출하여 업데이트된 학생목록을 화면에 보여주는 기능의 함수 
+		function deleteStudent(name){//"김바보"
+			
+			//let students = ["김구","김똥개","김바보"]; //학생들의 이름을 저장할 빈 배열 생성
+			
+			students = $.grep(students, function(student){
+					
+						//삭제할 학생이름이 아닌것만 남김 
+						return student !== name; //["김구","김똥개"]
+								
+			});
+			
+			renderList(); //학생 목록 렌더링 
+			
+		}
+		
+		
+		//학생목록 렌더링(업데이트된  학생목록을 화면을 웹브라우저가 로딩) 함수
+		//요약 : 입력한 학생 이름 목록을 화면에 동적으로 표시
+		function renderList(){
+			
+			//이전에 추가된 학생목록을 초기화 하여
+			//새로운 목록을 만들어 보여주기 위해 <ul></ul>사이의 데이터를 삭제하기 위해 empty()메소드 호출 
+			$("#student-list").empty();
+			
+			//만약 students배열에 이렇게 저장되어 있다고 가정하자 
+			//["김구","김똥개"]
+			//  0       1      index
+			
+			//
+			$.each(students,  function(index, student){
+										//index는 현재 반복"김구"의 index위치 번호 
+										//student는 현재 반복시 전달받은 현재요소("김구")를 말합니다.
+					
+					//각 학생이름과 삭제버튼을 포함한 <li>리스트 항목을 동적으로 만들어
+					//<ul id="student-list"></ul>	사이에  새로운 리스트 항목 <li>한쌍 추가
+					//요약 : 학생이름목록 새로운 항목으로 추가 
+					$("#student-list").append(`<li class="student-item">
+												   ${student}
+												   <button class="delete-student" data-name="${student}">삭제</button>
+											  </li>`);
+				
+			});
+						
+		}//renderList 함수 닫는 중괄호 
+		
+/*
+(동적 요소에 대한 이벤트 등록) 문법
+
+	$("이벤트가 등록된 자식요소의 부모요선택구문작성").on("등록이벤트종류명","이벤트가적용될자식요소",function(){});
+
+*/
+			
+		//삭제 버튼(동적으로 <li>내부에 생성된 <button>삭제</button>)에 click이벤트 등록		
+		$("#student-list").on("click", ".delete-student", function(){
+			
+			//ul요소의 하위 button삭제 요소 중에서 
+			//click이벤트가 발생당한  이것 (button 삭제요소)를 선택해서  ->  $(this)
+			
+//$(this) -> click이 발생한  <button class="delete-student" data-name="${student}">삭제</button>
+			
+			//클릭한 삭제 <button>의 같은 행에 위치한 삭제할 학생이름 얻기 
+			//						    data-name="김바보"
+			const studentName = $(this).data('name');
+			
+			//학생명 삭제 처리 함수 호출
+			deleteStudent(studentName);
+			
+		});
+		
+
+		
+		
+		
+		//학생 추가 버튼을 선택해서 가져와  click이벤트 등록 
+		$("#add-student").click(function(){
+			
+			//입력 <input>에서 입력한 학생이름을 문자열형태로 가져오고 
+			//가져온 문자열 이름 앞뒤에 빈공이 하나라도 있으면 모두 제거한 이름 문자열을 반환받아 저장
+			const studentName = $("#student-name").val().trim();
+						
+			//학생이름을 입력했고, students배열에 이름이 중복저장되어 있지 않은 경우  조건 
+			if(studentName && $.inArray(studentName, students)  === -1 ){
+				
+				//즉 학생이름을 입력했고,
+	            //students배열에 입력한 이름이 없을 경우
+	            //-> addStudent()함수를 호출하여 학생이름을 students배열에 추가
+				addStudent(studentName);
+	            
+	            //이름 입력<input>(이름 입력필드)를 비우고 포커스가 강제로 가도록 설정
+	            //.val('') 메소드를 호출하면  입력 필드의 값을  빈문자열로 설정하여 필드를 비웁니다.
+	            //.focus() 메소드를 호출하면  사용자가 입력할 수 있도록 포커스를 강제로 설정 합니다
+	            //		      즉, 사용자가 다음 학생 이름을 쉽게 입력 할수 있도록 유도하기 위함
+	            $("#student-name").val('').focus();
+	            				 	
+			}else{//학생이름을 입력하지 않고 추가 버튼을 눌렀거나, students배열에 이미 추가된 이름 문자열이라면?
+				
+				alert('학생이름을 입력하거나, 이미 존재하는 학생이름 입니다.');
+				
+			}
+			
+		});
+	
+		//초기 렌더링    application.html파일 웹브라우저로 처음 요청시 
+		renderList(); 
+		
+	
+	</script>
+	
+	
+
+</body>
+</html>
+
+
+
+
+
+

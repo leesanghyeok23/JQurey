@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+  <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+  <script type="text/javascript">
+ 		//배열
+ 		const arr1 = ["apple", "banana", "orange"];
+ 		//				0          1          2       index
+ 		const arr2 = ["grape",  "lemon",  "peach"];
+ 		//				0          1          2       index
+ 		
+ 		//배열병합
+ 		//			["apple","banana","orange"] + ["grape", "lemon", "peach"]
+		//		->  ["apple","banana","orange","grape", "lemon", "peach"]
+		//				0       1        2       3          4        5    index
+ 		//새 배열을  const mergedArr 상수에 저장
+ 		const mergedArr = $.merge(arr1, arr2);
+ 		
+ 		//mergedArr상수에 저장된 배열 정보 console.log로 출력
+ 		console.log(mergedArr);
+ 		
+ 		//배열요소 검색
+ 		//mergedArr배열에서 "lemon" 문자열이 저장되어 있는지 검색을 하는데
+ 		//만약 검색해서 저장되어 있으면?  저장된 "lemon"문자열의 index위치 번호를 가져와 console.log로 출력
+ 		const index = $.inArray("lemon",mergedArr);
+ 		//배열 요소 체크 
+ 		if(index > -1){
+ 			console.log("lemon is at index " + index); //4
+ 		}
+ 		
+ 		//const mergedArr배열
+		//		->  ["apple","banana","orange","grape", "lemon", "peach"]
+		//				0       1        2       3          4        5    index
+ 		
+ 		//배열 요소 필터링
+ 		const filteredArr = $.grep(mergedArr, function(elem){
+ 													//"apple"
+ 													//"banana"
+ 													//"orange"
+ 													//"grape"
+ 													//"lemon"
+ 													//"peach"
+ 													
+ 					   
+ 					return  elem.indexOf('a') > -1;
+ 						//"apple".indexOf('a') -> index 위치번호 0 반환
+ 						// 01234
+ 						
+ 						//"banana".indexOf('a') -> index 위치번호 1반환
+ 						// 01
+ 						
+ 						//"orange".indexOf('a') -> index 위치 번호 2 반환 
+ 						// 012
+ 						
+ 						//"grape".indexOf('a') ->  index 위치번호 2반환
+ 						// 012
+ 						
+ 						//"lemon".indexOf('a') ->  없으므로 -1 반환 
+ 						// 
+ 						
+ 						//"peach".indexOf('a')  -> index 위치번호 2 반환
+ 						// 012
+ 						
+ 					//새 배열 	
+ 					//[ "apple",  "banana" ,"orange", "grape", "peach" ]
+ 			
+ 		});
+ 		
+		console.log(filteredArr);
+		
+		//filteredArr 배열 -> [ "apple",  "banana" ,"orange", "grape", "peach" ]
+		//					      0         1          2         3        4        index
+		
+		
+ 		//filteredArr 배열에 저장된 각 문자열들을 대문자로 모두 변경후 새로운 배열에 담아 반환받기
+ 		//반환받은 새배열을 resultArr상수에 저장
+ 		const resultArr = $.map(filteredArr, function(elem){
+ 			
+ 					return elem.toUpperCase(); 
+ 			
+ 		});
+ 		
+ 		
+ 		// 새배열    ->     출력       ["APPLE","BANANA","ORANGE","GRAPE", "PEACH"]  
+ 		console.log(resultArr);
+ 		
+ 		//JSON.stringify(배열객체메모리전달)  함수는
+ 		// 자바스크립트 객체를 JSON 문자열(String)로 변환 해서 반환 하는 함수 
+ 		//  {속성:값  }  -> '{속성:값}' 문자열로 변환해서 반환 
+ 		//  [값1,값]    -> '[값1,값2]' 문자열로 변환해서 반환 
+ 		
+ 		console.log(  JSON.stringify(resultArr)  );
+ 		//         '["APPLE","BANANA","ORANGE","GRAPE","PEACH"]'  <-문자열 형태의 배열 모습 출력 
+ 		
+ 		
+  
+  </script>
+ 
+</head>
+<body>
+
+</body>
+</html>

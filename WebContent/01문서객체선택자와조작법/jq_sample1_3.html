@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+	
+	<!-- 주제 :  class속성에 대한 값을 이용해서  HTML을 선택하는 class선택자 기호  . 을 이용한 예 -->
+
+	<!--  JQUERY 문법 사용하기 위한   CDN주소 작성 -->
+	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+	
+	<script>
+		//웹브라우저창(window객체)이  HTML문서 내부에 있는 모든 HTML태그들을 로딩했을때
+		//이벤트 처리함수 function(){}이 호출되어 실행되게 선언 하자 .
+		$(function(){
+			//.  class속성이 설정된  html태그를 선택해 오는  class선택자 기호
+			//.tit  class속성이 설정되어 있고 값이 tit인  html태그 <h2>를 최종 선택해 옵니다.
+			$(".tit").css("background-color","red").css("border","2px dashed yellow");
+																	// 파선 
+			//<h2 class="tit">선택자</h2>		
+		});
+	</script>
+</head>
+<body>
+	<h1>제이쿼리</h1>
+	<h2 class="tit">선택자</h2>
+	<h3>직접선택자</h3>
+</body>
+</html>
+
+
+
+

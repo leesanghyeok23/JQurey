@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<script src = https://code.jquery.com/jquery-latest.min.js></script>
+		
+		<!-- 
+			배열 관련 메소드 종류 중에서
+			$.map()
+			 - 배열 또는 객체의 요소를 하나씩 꺼내어 변형해서 새로운 배열을 만드는 함수
+			 - 문법 : $.map(배열_또는_객체, fucntion(값, 인덱스_또는_키){
+			 	
+			 	return 새로운_값;
+			 })
+			-> 해석 : 배열 또는 객체를 매개변수로 받아서, 각 요소를 가공한 후 새로운 배열을 만들어 반환합니다.
+			예) const array = [1,2,3,4,5];
+				const squares = $.map(arry, function(elem, index){
+					return elem * elem;
+				})
+		 -->
+		<script type="text/javascript">
+			let arr1 = [
+				
+				{"area":"서울", "name":"무대리"},
+				{"area":"부산", "name":"홍과장"},
+				{"area":"대전", "name":"박사장"},
+				{"area":"서울", "name":"빅마마"}
+				
+			];
+			
+			
+			 //$.map()메소드에 의해 새롭게 가공된 배열을 저장 할 변수arr2변수
+			 //arr1배열에 저장된 {}객체 갯수만큼 function을 반복실행합니다.
+			let arr2 = $.map(arr1, function(elem, index){
+				//elem매개변수에는  arr1배열에 저장된 {}객체를 index 0~ index 3의 순서대로 받습니다.
+				//전달받은 {속성명:속성값} 객체의 속성값을 꺼내와서 사용하려면?
+				//객체명.속성명을 작성하면 속성명에 저장된 속성값을 얻을 수 있음.		
+				
+				if(elem.area == "서울"){//각 객체들이 사는 지역이 서울인 객체들만 추출해서
+					// 새로운 배열에 추가하여 새로운 배열 자체를 반환
+					return elem;
+				
+				
+				
+					
+				}
+				
+				
+			});
+			console.log(arr2);
+			
+			console.log("==================== first End =============================");
+			
+			let arr3 = $.grep(arr1, function(elem, index){
+				
+				//{}객체 내부에 area속성의 값이 "서울"을 포함하고 있다면?
+				if(elem.area === "서울"){
+					return true; 
+				}else{
+					return false; 
+				}
+				});
+			console.log(arr3);
+			console.log("=========== second End =============================");
+		
+		</script>
+		<!-- 
+			$.grep(array, function(매개변수1,매개변수2){
+				
+				return 조건식 또는 true 또는 false;
+			예) const array = [1,2,3,4,5];
+							  0,1,2,3,4 index;	
+				const evens = $.grep(array, function(elem, index){
+				
+						return elem % 2 === 0;
+				});	
+				
+			console.log(evens);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		 -->
+	</head>
+	<body>
+	
+	
+	
+	
+	</body>
+</html>

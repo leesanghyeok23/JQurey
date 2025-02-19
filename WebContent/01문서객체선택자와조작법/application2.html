@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>할 일 목록</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #todoList {
+            margin-top: 20px;
+        }
+        .todo-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-bottom: 5px;
+        }
+        .remove-btn {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+   
+    <script>
+    //  웹페이지(HTML문서)가 완전히 웹브라우저에 로그된후 실행되는코드
+    //  JQuery의  $(document).ready(); 는  HTML요소들이 준비되었을때 실행되도록 보장함
+        $(document).ready(function() {
+        	
+        	//<button id="addTodoBtn">추가</button> 버튼이 click되었을때 실행되는 function이다 
+            $('#addTodoBtn').click(function() {
+            				//<input type="text" id="todoInput" placeholder="할 일을 입력하세요" value="공부">
+            				//선택해서 가져와  입력한 값을 가져와서 상수 todoText에 저장
+            				//.val() -> <input>에 입력한 value속성에 설정된 값 얻기 
+            				//.trim() -> 입력한 값(문자열)의 앞뒤 공백을 제거하여 불필요한 공백이 포함되지 않도록 문자열 얻기 
+                const todoText = $('#todoInput').val().trim();
+            	//사용자가 입력한  할일목록 문자열 값 얻기 
+        
+                if (todoText) {//입력한 값이 비어있지 않다면?(즉, 사용자가 무엇인가를 입력했다면?)
+                		
+                    addTodoToList(todoText);//할일 목록에 추가하는 함수 호출!
+                
+                
+                    $('#todoInput').val(''); //<input>의 value속성에 빈공백문자열을 설정해 
+                    						  //다음 입력 을 받을 준비를 하자
+                    						
+                } else {//입력한 값이 없다면?(사용자가 아무것도 입력하지 않았다면?)
+                	
+               		//경고 메세지 창을 띄워서 사용자가에 입력이 필요함을 알림
+                    alert('할 일을 입력하세요.');
+                }
+            });
+        
+        	//새로운 할일을 목록에 추가하는 함수 
+        	//text매개변수에는 사용자가 입력한 할 일 내용을 문자열로 전달 받습니다.
+            function addTodoToList(text) {
+            	
+        		//새로운 <div>요소를 생성하고 clss속성값을 todo-item으로 추가함 
+        		//<div>사이에는 할일 내용 <span>${text}</span> 과
+        		//<div>사이에는 삭제 버튼 <button class="remove-btn">삭제</button> 들어갈 예정 
+                const todoItem = $('<div class="todo-item"></div>');
+                
+        		/*
+        			.html() 함수 설명
+        			- 선택한 HTML요소 내부의 내용을 변경하거나 설정할때 사용함
+        			
+        			- 여기서는 todoItem(<div class="todo-item"></div>)사이에 
+        			    내용 과 삭제버튼을 추가하는 역할을 합니다.
+        			    
+        			- 기존 내용을 없애고,  새로운 HTML코드를 삽입하는 함수 
+        			
+        			- 예를 들어  <div>바보똥개</div>.html(`<p>Hello</p>`);
+        			    결과   <div><p>Hello</p></div>   이렇게   <p>전체가 <div>사이에 추가됩니다.
+        			    
+        			- 기존의 내용을 유지 하면서 새로운 내용을 추가하려면 append()함수를 사용할수도 있음 
+        			
+        					
+        		*/
+                
+                todoItem.html(`
+                    <span>${text}</span>
+                    <button class="remove-btn">삭제</button>
+                `);
+        		/*
+        			<div class="todo-item">
+        				<span>${text}</span>
+                    	<button class="remove-btn">삭제</button>	
+        			</div>
+        		*/
+        			    
+        			    
+        		/*
+        		   find()함수 
+        		   - 선택한 요소 내부에서 특정한 하위요소를 찾을 떄 사용합니다.
+        		*/
+        		//<button class="remove-btn">삭제</button>	click 이벤트 등록  후 처리
+                todoItem.find('.remove-btn').click(function() {
+                    todoItem.remove();
+                });
+        
+                $('#todoList').append(todoItem);
+            }
+            
+            
+        });//$(document).ready(function(){});   
+        
+    </script>
+</head>
+<body>
+    <h1>할 일 목록</h1>
+    <input type="text" id="todoInput" placeholder="할 일을 입력하세요">
+    <button id="addTodoBtn">추가</button>
+
+    <div id="todoList"></div>
+
+</body>
+</html>
