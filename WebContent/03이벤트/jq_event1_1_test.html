@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+	<!-- 제이쿼리 설치 -->
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script>
+		$(function(){
+			/*
+				단독 이벤트 등록메소드 종류중에서 click메소드 사용
+
+				문법
+							$("이벤트등록대상요소선택").click(function(){
+
+								  클릭 이벤트 처리코드 작성;
+
+							});
+			*/
+			
+			//<button class="btn1">버튼1</button>요소를 선택해
+			//click단독 이벤트 등록 메소드로 클릭하는 동작 (이벤트)를 등록하고
+			//만약 사이트 이용자가 해당버튼1을 클릭하면 이벤트 핸들러 함수가 이벤트 처리할 수 있도록 작성
+			$(".btn1").click(function(){
+				
+				//클릭 이벤트 처리코드 작성;
+				//<p>내용1</p> 선택해서 가져와 폰트색상을 빨강으로 설정
+				//
+				$(".btn1").parent().next().css("color","red");
+				
+			});
+		
+			//---------------------------------------------------------
+
+			/*
+				그룹 이벤트 등록 메소드 on 사용
+			*/
+			//- on()그룹 이벤트 등록 메소드를 이용해 하나 이상의 이벤트를 등록하는 기본 문법3
+			/*
+				$("등록할 이벤트 대상요소 선택").on(
+					
+											{
+													"등록할이벤트종류1 등록할이벤트종류2": function(){},
+													"등록할이벤트종류3 등록할이벤트종류4": function(){},
+												
+											}
+						
+										  );
+			
+			*/
+				//<button class="btn2">버튼2</button>
+				// 마우스포인터를 올리는 동작 -> mouseover
+				// 					-> focus
+				// 마우스포인터를 올리는 동작 -> mouseout
+				// 포커스를 다른 요소로 이동시키는 동작 -> blur이벤트
+			$("[class=btn2]").on({
+					
+					"mouseover focus": function(){
+					$("p:eq(3)").css("color", "blue");	
+						
+					},// 이벤트 등록(mouseover focus)funuctino끝
+					"mouseout blur": function(){	
+						$("p:eq(3)").css("color", "aqua");	
+						
+					}// 이벤트 등록(mouseout blur)funuctino끝
+				}); // $("[class=btn2]").on
+				
+			//on 메소드를 이용하여 하나이상의 이벤트 종류를 선택한요소에 다중 등록한 후 같은 이벤트 처리
+			// - on() 그룹 이벤트 등록 메소드를 이용해 이벤트 하나 이상 등록하는 기본문법
+			/*
+				$("등록할이벤트대상요소선택").on("이벤트종류1 이벤트종류2 이벤트종류3", function(){
+					등록한 이벤트종류1 또는 이벤트 종류2 또는 이벤트종류3 중에 하나의 이벤트가 발생했을때 처리할 코드 작성
+				});
+			*/
+			
+				$(".btn3").on("click mouseover focus", function(){
+					
+					//<body></body>요소를 선택해 배경색을 green으로 설정
+					//<p>내용3</p>요소를 선택해서 내용3 글자를 내용으로 변경
+					$("body").css("backgroundColor", "green");
+					$("p:eq(5)").text("내용");			
+					
+				})
+				
+				
+			});//최상위 $(function(){});
+			
+						
+			
+			
+	</script>
+</head>
+<body>
+	<p>
+		<button class="btn1">버튼1</button>
+	</p>
+	<p>내용1</p>
+	<p>
+		<button class="btn2">버튼2</button>
+	</p>
+	<p>내용2</p>
+	<p>
+		<button class="btn3">버튼3</button>
+	</p>
+	<p>내용3</p>	
+
+
+
+</body>
+</html>
+
+
+
