@@ -20,61 +20,58 @@
 			      -> trigger메소드를 호출하면 강제로 등록한 단독이벤트가 발생하게 됩니다.
 		*/
 				
-		//주제 : 버튼을 강제로 클릭되게 하여~~   이벤트 처리하는 방법
-		//순서1	<button class="btn1">버튼1</button>	요소를 선택해서 가져와서
-		// click이벤트 등록
-		$(".btn1").click(function(){
-			//click이벤트가 발생하면 처리할 코드 작성
-			//<p>내용1</p>요소를 선택해 내용1 글자색을 빨강으로 설정
-			$("p:eq(1)").css("color","red");
-			
-		});
+//주제 : 버튼을 강제로 클릭되게 하여~~   이벤트 처리하는 방법
+		//순서1.	<button class="btn1">버튼1</button> 요소를 선택해 가져와
+		//      click단독 이벤트 등록 메소드로 click이벤트 등록
+				$(".btn1").click(function() {
+					//click이벤트가 발생하면 처리할 코드 작성
+					//<p>내용1</p>요소를 선택해    내용1   글자색을 빨강으로 설정
+					$("p:eq(1)").css("color","red"); 				
+				});
+		//순서2.   trigger("click")메소드를 호출하여 
+		//		  <button class="btn1">버튼1</button>에  
+		//		  사이트 이용자가 클릭동작(이벤트)을 하지 않아도
+		//		 자동으로 강제로 클릭동작(이벤트)가 발생하게 합니다.
+				$(".btn1").trigger("click"); 
+				
+		//참고. 클릭하지 않아도 강제 클릭되게  click()메소드를 호출하는 방법도 있다.
+		//		$(".btn1").click();
 		
-		//순서2. trigger(click)메소드 호출하여
-		//		<button class="btn1">버튼1</button>에
-		//		사이트 이용자가 클릭하는 동작(이벤트)를 하지 않아도
-		//		자동으로 강제로 클릭동작(이벤트)가 발생하게 합니다.
-		
-		$(".btn1").trigger("click");
-		//$(".butn1").click;
-
-		
-		
-						
 		//--------------------------------------------------------------------------------
- 		
-		//순서1. <button class="btn2">버튼2</button>을 선택해서 가져와 btn2변수에 저장
-		
-		//순서1-1. btn2변수에 저장된 버튼2요소에 마우스포인터를 올리는 동작,
-		//								포커스를 가하는 동작을 다중 등록
-		//참고. on메소드 사용 기본문법1 사용
-			/*
-				이벤트 처리코드 작성
-				<p>
-					<button class="btn2">버튼2</button>
-				</p>
-				<p>내용2</p> <---최종선택해서 가져와 글자색상을 파란색으로 설정
-			*/
-		
-		let btn2 = $(".btn2");
-		btn2.on( "mouseover focus", function(){
-			$("p:eq(3)").css("color", "blue");
-		});
-			
-		btn2.trigger("mouseover"); // = btn2.mouseover();
-		btn2.trigger("focus"); // = btn2.focus();
-
+ 
+		 //순서1. <button class="btn2">버튼2</button> 을 선택해서 가져와 btn2변수에 저장
+   		 let btn2 = $(".btn2");
+		 
+		 //순서1-1. btn2변수에 저장된 버튼2요소에 마우스포인터를 올리는동작,
+	     //				                                  포커스를 가하는 동작을 다중 등록
+         //참고. on메소드 사용 기본문법1 사용
+         btn2.on("mouseover focus", function(){
+			   	   /*
+					       이벤트 처리 코드 작성
+					
+						<p>
+							<button class="btn2">버튼2</button>
+						</p>
+						<p>내용2</p>  <------ 최종선택해서 가져와 글자색상을 파란색으로 설정
+					*/
+        	 		btn2.parent().next().css("color","blue");
+        	 
+         });
+         
 		
 			
+		//순서2. trigger메소드를 이용하여 <button class="btn2">버튼2</button>요소에
+		//      mouseover이벤트 강제로 발생시키기 
+		 btn2.trigger("mouseover"); 
+    //   btn2.mouseover();   <--- 이방법도 있다.
+		
+	    //순서2. trigger메소드를 이용하여 <button class="btn2">버튼2</button>에
+	    //      강제로 focus이벤트를 발생시키자
+        // btn2.trigger("focus"); 
+    //     btn2.focus();     <--- 이방법도 있다.
+	     
 		});
-		
-		
-		
-		
-   
 	</script>
-	
-	
 </head>
 <body>
 	<p>

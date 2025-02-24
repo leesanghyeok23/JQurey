@@ -32,12 +32,41 @@
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script>
 	$(function( ){
-	
+		//<strong>객체 조작 및 생성</strong>요소를 선택해서
+		//<strong>요소를 감싸서 작성되어 있는 부모요소<h1 id="tit_1">..</h1>삭제
 		$("strong").unwrap();
-		$(".ct1").wrap("<div></div>");
-		$(".ct2").wrapAll("<div></div>");
-		$("li").wrapInner("<h3></h3>");
 		
+		//내용1  내용2 <p>요소 2쌍을 선택해서 가져와  
+		//wrap("<div></div>")메소드를 호출하여 각각 감싸서 추가 
+		$(".ct1").wrap("<div></div>");
+		/*
+		<div>
+			<p class="ct1">내용1</p>
+		</div>
+		<div>
+			<p class="ct1">내용2</p>
+		</div>
+		*/
+		
+		//<p class="ct2">내용3</p>
+	    //<p class="ct2">내용4</p> 선택해서 가져와
+	    //wrapAll메소드호출하여  새로생성하는 <div></div>요소로 한꺼번에 한번 감쌈
+		$(".ct2").wrapAll("<div></div>");
+		/*
+		 <div>
+			<p class="ct2">내용3</p>
+			<p class="ct2">내용4</p>
+		 </div>
+		*/
+		
+		//<li>내용3</li>
+		//<li>내용4</li> 두쌍을 선택해서 
+		//<h3></h3>새 요소노드를 생성하여 각각 감싸서 표현
+		$("li").wrapInner("<h3></h3>");
+// 		<ul>
+//			<li><h3>내용3</h3></li>
+//			<li><h3>내용4</h3></li>
+//		</ul>		
 	});
 	</script>
 	<style>
@@ -58,3 +87,7 @@
 	</ul>
 </body>
 </html>
+
+
+
+

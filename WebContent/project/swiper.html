@@ -29,13 +29,13 @@
     <div class="swiper">
       <div class="swiper-wrapper">
         <div class="swiper-slide" style="background-image: url('images/visual_img_1.jpg')">
-          슬라이드 1
+         	 슬라이드 1
         </div>
         <div class="swiper-slide" style="background-image: url('images/visual_img_2.jpg')">
-          슬라이드 2
+          	슬라이드 2
         </div>
         <div class="swiper-slide" style="background-image: url('images/visual_img_3.jpg')">
-          슬라이드 3
+          	슬라이드 3
         </div>
       </div>
       <!-- 추가 내비게이션 버튼 -->
@@ -53,19 +53,19 @@
       $(document).ready(function () {
         // Swiper 초기화
         const swiper = new Swiper(".swiper", {
-          loop: true, // 슬라이드 무한 루프
-          autoplay: {
-            delay: 3000, // 자동 슬라이드 간격 (밀리초)
-            disableOnInteraction: false, // 사용자 상호작용 시 자동 재생 유지
-          },
-          pagination: {
-            el: ".swiper-pagination",
-            clickable: true, // 클릭 가능 페이지네이션
-          },
-          navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-          },
+										          loop: true, // 슬라이드 무한 루프
+										          autoplay: {
+										            delay: 3000, // 자동 슬라이드 간격 (밀리초)
+										            disableOnInteraction: false, // 사용자 상호작용 시 자동 재생 유지
+										          },
+										          pagination: {
+										            el: ".swiper-pagination",
+										            clickable: true, // 클릭 가능 페이지네이션
+										          },
+										          navigation: {
+										            nextEl: ".swiper-button-next",
+										            prevEl: ".swiper-button-prev",
+									          },
         });
       });
     </script>
